@@ -14,13 +14,14 @@ datasource db {
 }
 
 model Language {
-  id        Int      @id @default(autoincrement())
-  language  String
-  createdAt DateTime @default(now()) @map("created_at")
+  id        Int               @id @default(autoincrement())
+  language  String            @unique
+  createdAt DateTime          @default(now()) @map("created_at")
+  projects  ProjectLanguage[]
 }
 
 model Project {
-  id            Int      @id
+  id            Int               @id
   name          String
   description   String?
   html_url      String
@@ -28,4 +29,15 @@ model Project {
   created_at    DateTime
   updated_at    DateTime
   languages_url String
+  languages     ProjectLanguage[]
+}
+
+model ProjectLanguage {
+  id         Int      @id @default(autoincrement())
+  projectId  Int
+  project    Project  @relation(fields: [projectId], references: [id])
+  languageId Int
+  language   Language @relation(fields: [languageId], references: [id])
+
+  @@unique([projectId, languageId])
 }

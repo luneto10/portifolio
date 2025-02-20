@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 from fastapi.testclient import TestClient
 from app.main import app
-from app.models.schemas.project_repo_schema import ProjectCreate
+from models.schemas.project import ProjectCreate
 import pytest
 
 

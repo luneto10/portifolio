@@ -4,11 +4,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routes import github_routes, projects_routes
 from app.utils.prisma import connect, disconnect
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await connect()
     yield
     await disconnect()
+
 
 app = FastAPI(lifespan=lifespan)
 
@@ -25,4 +27,5 @@ app.include_router(github_routes.router)
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, port=8000)
