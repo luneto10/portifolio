@@ -1,7 +1,8 @@
 from fastapi import APIRouter, HTTPException
 import httpx
-from app.services.github_service import fetch_github_repos
-from app.models.schemas.github_schema import GitHubRepo
+from app.v1.services.github_service import fetch_github_repos
+from app.v1.models.github import GitHubRepo
+
 router = APIRouter(prefix="/github")
 
 @router.get("/repos", response_model=list[GitHubRepo])
