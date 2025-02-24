@@ -1,5 +1,5 @@
 import httpx
-from app.core.config import settings
+from app.v1.core.config import settings
 
 async def fetch_languages(language_url: str) -> list[str]:
     """

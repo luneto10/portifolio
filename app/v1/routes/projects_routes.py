@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
-from app.services.project_service import ProjectService
-from app.models.schemas.project import ProjectCreate
+from app.v1.services.project_service import ProjectService
+from app.v1.models.project import ProjectCreate
 
 router = APIRouter(prefix="/projects")
 

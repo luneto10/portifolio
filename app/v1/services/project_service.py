@@ -2,12 +2,12 @@ import logging
 from typing import List, Any, Optional
 from fastapi import HTTPException
 from prisma.errors import RecordNotFoundError, PrismaError
-from app.models.schemas.project import (
+from app.v1.models.project import (
     ProjectCreate,
     ProjectGet,
 )
-from app.utils.prisma import get_prisma
-from app.services.language import fetch_languages
+from app.v1.db.prisma import get_prisma
+from app.v1.services.language import fetch_languages
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
