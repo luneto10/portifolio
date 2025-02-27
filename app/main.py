@@ -16,8 +16,13 @@ app.add_middleware(
     allow_origins=["*"],
     allow_methods=["*"],
 )
+
+
 # Include routers
 # app.include_router(projects_routes.router, prefix="/v1")
+@app.get("/")
+def root():
+    return "Server is running"
 
 
 app.include_router(github_routes_v2.router)

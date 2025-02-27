@@ -13,7 +13,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-
 @asynccontextmanager
 async def db_lifespan(app: FastAPI):
     logger.info("Starting DB lifespan...")
