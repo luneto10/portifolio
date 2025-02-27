@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-# from app.v1.routes import github_routes, projects_routes
 from app.v2.routes import (
     github_routes as github_routes_v2,
     projects_routes as projects_routes_v2,

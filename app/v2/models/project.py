@@ -6,6 +6,7 @@ from app.utils.validators import PyObjectId
 
 
 class ProjectCreate(BaseModel):
+    github_id: int
     name: str
     description: Optional[str] = None
     html_url: str
@@ -22,10 +23,11 @@ class LanguageResponse(BaseModel):
 
 class ProjectGet(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
+    github_id: int
     name: str
     description: Optional[str] = None
     html_url: str
     pushed_at: datetime
     created_at: datetime
     updated_at: datetime
-    languages: List[LanguageResponse]
+    languages: List[str]
