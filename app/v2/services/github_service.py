@@ -1,6 +1,6 @@
 import httpx
-from app.v1.core.config_v1 import settings
-from app.v1.models.github import GitHubRepo
+from app.v2.core.config import settings
+from app.v2.models.github import GitHubRepo
 
 
 async def fetch_github_repos() -> list[GitHubRepo]:

@@ -1,6 +1,6 @@
 import logging
 from supabase import create_client
-from app.v1.core.config import settings
+from v1.core.config_v1 import settings
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)  # Configure as needed

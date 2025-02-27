@@ -1,7 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 from app.main import app
-from app.utils.prisma import connect, disconnect
+from app.v1.db.prisma import connect, disconnect
 
 
 @pytest.fixture(scope="session")
