@@ -19,7 +19,7 @@ class LanguageResponse(BaseModel):
     language: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class ProjectGet(BaseModel):
@@ -33,7 +33,7 @@ class ProjectGet(BaseModel):
     languages: List[LanguageResponse]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
     @classmethod
     def from_prisma(cls, data: dict) -> "ProjectGet":

@@ -5,9 +5,9 @@ from app.v2.routes import (
     github_routes as github_routes_v2,
     projects_routes as projects_routes_v2,
 )
-from app.v2.db.mongoDB import db_lifespan as db_lifespan_mongo
+from app.v2.db import mongoDB
 
-app = FastAPI(lifespan=db_lifespan_mongo)
+app = FastAPI(lifespan=mongoDB.lifespan)
 
 # CORS setup
 app.add_middleware(
