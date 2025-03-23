@@ -1,7 +1,6 @@
 from datetime import datetime
 from pydantic import BaseModel, Field
 from typing import Any, List, Optional
-
 from app.utils.validators import PyObjectId
 
 
@@ -14,11 +13,7 @@ class ProjectCreate(BaseModel):
     created_at: datetime
     updated_at: datetime
     languages_url: str
-
-
-class LanguageResponse(BaseModel):
-    id: int
-    language: str
+    image_url: Optional[str] = None
 
 
 class ProjectGet(BaseModel):
@@ -31,3 +26,11 @@ class ProjectGet(BaseModel):
     created_at: datetime
     updated_at: datetime
     languages: List[str]
+    languages_url: str
+    image_url: Optional[str] = None
+
+
+class ProjectUpdate(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+    image_url: Optional[str] = None

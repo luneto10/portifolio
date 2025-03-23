@@ -5,7 +5,8 @@ from motor.motor_asyncio import (
     AsyncIOMotorCollection,
 )
 from app.v2.services.project_service import ProjectService
-from app.v2.models.project import ProjectCreate, ProjectGet
+from app.v2.models.project import ProjectCreate, ProjectGet, ProjectUpdate
+from app.utils.validators import PyObjectId
 
 router = APIRouter(prefix="/projects", tags=["Projects"])
 
@@ -16,15 +17,13 @@ def get_project_service(request: Request) -> AsyncIOMotorCollection:
 
 
 @router.get("/", status_code=200, response_model=list[ProjectGet])
-async def get_projects(
-    service : ProjectService = Depends(get_project_service)
-):
+async def get_projects(service: ProjectService = Depends(get_project_service)):
     return await service.get_projects()
 
 
 @router.get("/{id}", status_code=200, response_model=ProjectGet)
 async def get_project_by_id(
-    id: int, service: ProjectService = Depends(get_project_service)
+    id: PyObjectId, service: ProjectService = Depends(get_project_service)
 ):
     return await service.get_project_by_id(id)
 
@@ -36,8 +35,20 @@ async def insert_project(
     return await service.insert_project(project)
 
 
-@router.delete("/{id}", status_code=200, response_model=ProjectGet)
+@router.put("/{id}", status_code=201)
+async def update_project(
+    id: PyObjectId,
+    project: ProjectUpdate,
+    service: ProjectService = Depends(get_project_service),
+):
+    return await service.update_project(id, project)
+
+@router.delete("/", status_code=200)
+async def delete_projects(service: ProjectService = Depends(get_project_service)):
+    return await service.delete_projects()
+
+@router.delete("/{id}", status_code=200)
 async def delete_project(
-    id: int, service: ProjectService = Depends(get_project_service)
+    id: PyObjectId, service: ProjectService = Depends(get_project_service)
 ):
     return await service.delete_project(id)
