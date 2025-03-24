@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.v2.routes import (
@@ -6,6 +6,9 @@ from app.v2.routes import (
     projects_routes as projects_routes_v2,
 )
 from app.v2.db import mongoDB
+
+from app.v2.auth.jwt_bearer import JWTBearer
+from app.v2.routes import admin_routes
 
 app = FastAPI(lifespan=mongoDB.lifespan)
 
@@ -27,7 +30,8 @@ def root():
 app.include_router(github_routes_v2.router)
 
 # Include routers v2
-app.include_router(projects_routes_v2.router, prefix="/v2")
+app.include_router(projects_routes_v2.router, prefix="/v2", dependencies=[Depends(JWTBearer())])
+app.include_router(admin_routes.router, prefix="/v2")
 
 if __name__ == "__main__":
     import uvicorn

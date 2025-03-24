@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     MONGO_PASSWORD: str
     MONGO_DATABASE: str
     EXTRA_CONNECT_PARAMS: str
+    SECRET_KEY: str
+    ALGORITHM: str
     @property
     def MONGO_URI(self) -> str:
         encoded_username = quote_plus(self.MONGO_USERNAME)

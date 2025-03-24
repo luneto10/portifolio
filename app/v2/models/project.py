@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 from typing import List, Optional
 from app.utils.validators import PyObjectId
-from beanie import Document
+from beanie import Document, Save, before_event
 
 
 class Project(Document):
@@ -20,10 +20,11 @@ class Project(Document):
     class Settings:
         name = "projects"
         indexes = ["github_id"]
-
-    async def pre_save(self):
-        # Automatically update the updated_at field on each save.
+        
+    @before_event(Save)
+    def pre_save(self):
         self.updated_at = datetime.now(timezone.utc)
+        
 
     class Config:
         json_schema_extra = {
