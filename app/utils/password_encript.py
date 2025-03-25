@@ -1,6 +1,6 @@
 from passlib.context import CryptContext
 
-hash_helper = CryptContext(schemes=["bcrypt"])
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash_password(password: str):
     """
@@ -8,7 +8,7 @@ def hash_password(password: str):
     :param password: The plaintext password to hash.
     :return: The hashed password.
     """
-    return hash_helper.hash(password)
+    return pwd_context.hash(password)
 
 def verify_password(password: str, hashed_password: str):
     """
@@ -17,4 +17,4 @@ def verify_password(password: str, hashed_password: str):
     :param hashed_password: The hashed password to compare against.
     :return: True if the passwords match, False otherwise.
     """
-    return hash_helper.verify(password, hashed_password)
+    return pwd_context.verify(password, hashed_password)

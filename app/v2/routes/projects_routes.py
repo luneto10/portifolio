@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, Depends
 from app.v2.services.project_service import ProjectService
 from app.v2.models.project import Project, ProjectCreate, ProjectGet, ProjectUpdate
 from app.utils.validators import PyObjectId
+from app.v2.auth.jwt_handler import get_current_user
 
 router = APIRouter(prefix="/projects", tags=["Projects"])
 
@@ -14,9 +15,9 @@ async def get_projects(service: ProjectService = Depends(get_project_service)):
 
 @router.get("/{id}", status_code=200, response_model=ProjectGet)
 async def get_project_by_id(
-    id: PyObjectId, service: ProjectService = Depends(get_project_service)
+    id: PyObjectId, service: ProjectService = Depends(get_project_service), user_id: str = Depends(get_current_user)
 ):
-    return await service.get_project_by_id(id)
+    return await service.get_project_by_id(id, user_id)
 
 @router.post("/", status_code=201, response_model=ProjectGet)
 async def insert_project(

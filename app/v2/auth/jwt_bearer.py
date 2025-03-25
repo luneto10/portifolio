@@ -4,6 +4,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from .jwt_handler import decode_jwt
 
 from app.utils.logger import logger
+
 def verify_jwt(jwtoken: str) -> bool:
     isTokenValid: bool = False
 
@@ -11,7 +12,6 @@ def verify_jwt(jwtoken: str) -> bool:
     if payload:
         isTokenValid = True
     return isTokenValid
-
 
 class JWTBearer(HTTPBearer):
     def __init__(self, auto_error: bool = True):
@@ -21,7 +21,8 @@ class JWTBearer(HTTPBearer):
         credentials: HTTPAuthorizationCredentials = await super(
             JWTBearer, self
         ).__call__(request)
-        logger.info("Credentials :", credentials)
+        logger.info(f"Credentials: {credentials}")
+
         if credentials:
             if not credentials.scheme == "Bearer":
                 raise HTTPException(

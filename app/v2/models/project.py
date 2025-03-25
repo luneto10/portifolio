@@ -100,7 +100,6 @@ class ProjectGet(BaseModel):
 
 
 class ProjectUpdate(BaseModel):
-    # Only allow updating fields that the user should control.
     name: Optional[str] = Field(None, example="My Awesome Project Updated")
     description: Optional[str] = Field(None, example="An updated description for my project")
     image_url: Optional[str] = Field(None, example="https://example.com/my-awesome-project-updated.png")
