@@ -2,7 +2,7 @@ from typing import Any, Dict
 from fastapi import HTTPException, status
 
 from app.v2.models.admin import Admin, AdminData, AdminSignIn
-from app.utils.password_encript import hash_password, verify_password
+from backend.app.utils.password_encrypt import hash_password, verify_password
 from app.utils.logger import logger
 from app.v2.auth.jwt_handler import sign_jwt
 
