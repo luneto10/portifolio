@@ -1,0 +1,10 @@
+portifolio-api-venv/
+.env
+.env.database
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+.qodo
+venv/
