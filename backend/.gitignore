@@ -1,5 +1,6 @@
 portifolio-api-venv/
-.env*
+.env
+.env.database
 __pycache__/
 *.pyc
 *.pyo
