@@ -1,5 +1,5 @@
 from datetime import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Any, List, Optional
 
 
@@ -17,10 +17,7 @@ class ProjectCreate(BaseModel):
 class LanguageResponse(BaseModel):
     id: int
     language: str
-
-    class Config:
-        from_attributes = True
-
+    model_config = ConfigDict(from_attributes=True)
 
 class ProjectGet(BaseModel):
     id: int
@@ -32,8 +29,7 @@ class ProjectGet(BaseModel):
     updated_at: datetime
     languages: List[LanguageResponse]
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
     @classmethod
     def from_prisma(cls, data: dict) -> "ProjectGet":

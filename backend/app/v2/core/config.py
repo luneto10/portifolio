@@ -1,6 +1,9 @@
+import os
 from urllib.parse import quote_plus
+from pydantic import ConfigDict
 from pydantic_settings import BaseSettings
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 class Settings(BaseSettings):
     APP_ENV: str
@@ -23,9 +26,7 @@ class Settings(BaseSettings):
             f"?{self.EXTRA_CONNECT_PARAMS}"
         )
         
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
+    model_config = ConfigDict(env_file=".env", env_file_encoding="utf-8")
 
 
 settings = Settings()
